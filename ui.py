@@ -3,27 +3,15 @@ import numpy as np
 import bmesh
 import mathutils
 import copy
-from . import kabsch_align
-
-bl_info = {
-    "name": "Spectator",
-    "author": "gwirn",
-    "version": (1, 0),
-    "blender": (2, 80, 0),
-    "location": "View3D > N > Item > Spectator > Align",
-    "description": "Align two objects",
-    "warning": "",
-    "doc_url": "",
-    "category": "Align Object",
-}
+from . import kabsch_superimpose
 
 
-class SpectatorPanel(bpy.types.Panel):
-    bl_label = "Spectator"
-    bl_idname = "OBJECT_PT_spectator"
+class AcetonePanel(bpy.types.Panel):
+    bl_label = "Acetone"
+    bl_idname = "OBJECT_PT_acetone"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "Spectator"
+    bl_category = "Acetone"
 
     def draw(self, context):
         layout = self.layout
@@ -31,14 +19,16 @@ class SpectatorPanel(bpy.types.Panel):
 
         layout.prop(scene, "object_static")
         layout.prop(scene, "object_mobile")
-        layout.operator("object.spectator")
+        layout.operator("object.acetone")
 
 
-class SpectatorOperator(bpy.types.Operator):
-    bl_idname = "object.spectator"
-    bl_label = "Align"
+class AcetoneOperator(bpy.types.Operator):
+    bl_idname = "object.acetone"
+    bl_label = "Superimpose"
 
-    def align(self, context):
+    def superimpose(self, context):
+        """gets objects, their coordinates, computes rotation matrix and superimposes
+        the mobile object to the static"""
         scene = context.scene
         # get all objects
         objs = bpy.data.objects
@@ -74,9 +64,9 @@ class SpectatorOperator(bpy.types.Operator):
         c0_mesh.free()
         c1_mesh.free()
         # calculate the rotation matrix and the centroids
-        c0, c1, rmat = kabsch_align.rotamat(points_c0, points_c1)
+        c0, c1, rmat = kabsch_superimpose.rotamat(points_c0, points_c1)
 
-        # apply rotation matrix and translation to one object and get the new coordinates
+        # apply rotation matrix and translation to the mobile object and get the new coordinates
         cube1_trans = (
             rmat
             @ (
@@ -101,7 +91,7 @@ class SpectatorOperator(bpy.types.Operator):
         bmesh.update_edit_mesh(c1_data)
 
     def execute(self, context):
-        self.align(context)
+        self.superimpose(context)
         return {"FINISHED"}
 
 

@@ -1,5 +1,5 @@
-# Spectator
+# Acetone
 
-**S**elected **P**oint bas**E**d kabs**C**h algori**T**hm **A**lignment **TO**ol blende**R**
+k**A**bs**C**h sup**E**rposition **T**ool f**O**r ble**N**d**E**r
 
 Use Kabsch algorithm to superimpose two objects in blender based on selected points

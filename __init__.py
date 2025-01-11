@@ -5,11 +5,11 @@ bl_info = {
     "author": "gwirn",
     "version": (1, 0),
     "blender": (2, 80, 0),
-    "location": "View3D > N > Item > Spectator > Align",
-    "description": "Align two objects",
+    "location": "View3D > N > Item > Spectator > Superimpose",
+    "description": "Superimpose two objects",
     "warning": "",
     "doc_url": "",
-    "category": "Align Object",
+    "category": "Superimpose Object",
 }
 
 
