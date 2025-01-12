@@ -20,6 +20,8 @@ class AcetonePanel(bpy.types.Panel):
         layout.prop(scene, "object_static")
         layout.prop(scene, "object_mobile")
         layout.operator("object.acetone")
+        if scene.rmsd_done:
+            layout.label(text=f"RMSD: {scene.rmsd:.4f}")
 
 
 class AcetoneOperator(bpy.types.Operator):
@@ -66,6 +68,10 @@ class AcetoneOperator(bpy.types.Operator):
         # calculate the rotation matrix and the centroids
         c0, c1, rmat = kabsch_superimpose.rotamat(points_c0, points_c1)
 
+        # calculate how well they superimpose
+        pc1_trans = (rmat @ (points_c1 - c1).T).T + c0
+        self.rmsd = np.sqrt(((points_c0 - pc1_trans) ** 2).sum(-1).mean())
+
         # apply rotation matrix and translation to the mobile object and get the new coordinates
         cube1_trans = (
             rmat
@@ -92,6 +98,8 @@ class AcetoneOperator(bpy.types.Operator):
 
     def execute(self, context):
         self.superimpose(context)
+        context.scene.rmsd = self.rmsd
+        context.scene.rmsd_done = True
         return {"FINISHED"}
 
 
