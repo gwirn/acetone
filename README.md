@@ -15,7 +15,7 @@ In order to align two objects based on the selected points the following steps n
 *   Switch to `edit mode`
 *   Select points of the static (**not moved**) object ([separate](https://github.com/gwirn/acetone/tree/master/assets/separate.png) left side) `A` > `B` > `C`
 *   Select points of the mobile (**moved**) object ([separate](https://github.com/gwirn/acetone/tree/master/assets/separate.png) right side) `A` > `B` > `C` - **so that the corresponding points in the objects are selected in the same order (`A left` to `A right`, `B left` to `B right`, `C left` to `C right`)**
-*   Press n and go to the `acetone` header
+*   Press `n` and go to the `acetone` header
 *   Press `Superimpose`
 
 This will calculate the optimal rotation matrix based on the [Kabsch algorithm](https://en.wikipedia.org/wiki/Kabsch_algorithm) and update the coordinates of the `mobile object` so they align with the `static object` and are [superimposed](https://github.com/gwirn/acetone/tree/master/assets/superimposed.png).
