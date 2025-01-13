@@ -1,5 +1,4 @@
-# Acetone
-
+# Acetone 🧪
 k**A**bs**C**h algorithm based sup**E**rposition **T**ool f**O**r ble**N**d**E**r
 
 Use Kabsch algorithm to superimpose two objects in blender based on selected points. This should be used when only some points of two objects can be superimposed but the rest of the object is to different.
