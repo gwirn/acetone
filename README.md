@@ -22,4 +22,4 @@ In order to align two objects based on the selected points the following steps n
 This will calculate the optimal rotation matrix based on the [Kabsch algorithm](https://en.wikipedia.org/wiki/Kabsch_algorithm) and update the coordinates of the `mobile object` so they align with the `static object` and are [superimposed](https://github.com/gwirn/acetone/tree/master/assets/superimposed.png).
 
 ## Output
-**RMSD:** Root mean squared deviation between the selected aligned points to judge the superposition quality.
+**[RMSD](https://en.wikipedia.org/wiki/Root_mean_square_deviation_of_atomic_positions):** Root mean squared deviation between the selected aligned points to judge the superposition quality.
